@@ -66,6 +66,10 @@ function rgbc_custom_users_block_render( $attributes ) {
 		$result .= '<div class="rgbc-users__email">';
 		$result .= $user->user_email;
 		$result .= '</div>';
+		
+		$result .= '<div class="rgbc-users__biography">';
+		$result .= $user->user_description;
+		$result .= '</div>';
 
 		$result .= '</div>';
 	}
