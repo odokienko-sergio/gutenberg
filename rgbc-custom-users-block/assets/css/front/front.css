@@ -1,0 +1,57 @@
+.rgbc-users {
+    display: flex;
+    background: #fff;
+    padding: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.rgbc-users__row {
+    background: #e9e9e969;
+    margin: 7px 0 7px 0;
+    padding: 0 0 15px 0;
+    width: 32%;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.rgbc-users__name {
+    font-size: 17px;
+    font-weight: 500;
+    margin: 5px 0 0 0;
+}
+
+.rgbc-users__email {
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.rgbc-users__biography {
+    font-size: 16px;
+    overflow: hidden;
+}
+
+@media (max-width: 767px) {
+    .rgbc-users {
+        flex-direction: column;
+    }
+
+    .rgbc-users__avatar {
+        float: left;
+        margin: 0 15px 0 0;
+    }
+
+    .rgbc-users__name {
+        overflow: hidden;
+    }
+
+    .rgbc-users__email {
+        overflow: hidden;
+    }
+
+    .rgbc-users__row {
+        width: 100%;
+        text-align: left;
+        padding: 0;
+    }
+}
