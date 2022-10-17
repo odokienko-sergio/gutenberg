@@ -22,6 +22,49 @@ if ( ! class_exists( 'RGBC_CUB' ) ) {
 		}
 	}
 	/**
+	 * Server-side block render callback
+	 */
+	function rgbc_custom_users_block_render( $attributes ) {
+		$users = ! empty( $attributes['users'] ) ? $attributes['users'] : array();
+		if ( empty( $users ) ) {
+			return '<div class="rgbc-users rgbc-users__title">
+					<p>Please select at least 1 user in the block settings</p>
+				</div>';
+		}
+		$users_data = get_users( array( 'include' => $users ) );
+		if ( empty( $users_data ) ) {
+			return '<div class="rgbc-users rgbc-users__text">
+					<p>Can`t find selected users data</p>
+				</div>';
+		}
+		$result = '<div class="rgbc-users">';
+		foreach ( $users_data as $user ) {
+			$result .= '<div class="rgbc-users__row">';
+
+			$result .= '<div class="rgbc-users__avatar">';
+			$result .= get_avatar( $user->id, 96 );
+			$result .= '</div>';
+
+			$result .= '<div class="rgbc-users__name">';
+			$result .= $user->display_name;
+			$result .= '</div>';
+
+			$result .= '<div class="rgbc-users__email">';
+			$result .= $user->user_email;
+			$result .= '</div>';
+
+			$result .= '<div class="rgbc-users__biography">';
+			$result .= $user->user_description;
+			$result .= '</div>';
+
+			$result .= '</div>';
+		}
+		$result .= '</div>';
+
+		return $result;
+	}
+
+	/**
 	 * Helper function to get allowed users list for block settings
 	 */
 	function rgbc_get_allowed_users() {
@@ -29,11 +72,9 @@ if ( ! class_exists( 'RGBC_CUB' ) ) {
 			'search'         => '*@rgbc.dev',
 			'search_columns' => array( 'user_email' ),
 		) );
-
 		if ( empty( $users ) ) {
 			return array();
 		}
-
 		$result = array(
 			array(
 				'value' => '',
@@ -47,8 +88,10 @@ if ( ! class_exists( 'RGBC_CUB' ) ) {
 				'label' => sprintf( '%1$s (%2$s)', $user->user_login, $user->user_email ),
 			);
 		}
+
 		return $result;
 	}
+
 	/**
 	 * Add new endpoint to REST
 	 */
@@ -69,6 +112,7 @@ if ( ! class_exists( 'RGBC_CUB' ) ) {
 			$rout_params
 		);
 	} );
+
 	/**
 	 * Route callback
 	 */
@@ -95,6 +139,7 @@ if ( ! class_exists( 'RGBC_CUB' ) ) {
 				'label' => sprintf( '%1$s (%2$s)', $user->user_login, $user->user_email ),
 			);
 		}
+
 		return $result;
 	}
 }
