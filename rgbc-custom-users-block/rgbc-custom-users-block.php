@@ -8,6 +8,8 @@
  * Domain Path: /lang
  * Text Domain: rgbc-users
  */
+?>
+<?php
 if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
@@ -33,50 +35,6 @@ function rgbc_custom_users_block_init() {
 }
 
 add_action( 'init', 'rgbc_custom_users_block_init' );
-
-/**
- * Server-side block render callback
- */
-
-function rgbc_custom_users_block_render( $attributes ) {
-	$users = ! empty( $attributes['users'] ) ? $attributes['users'] : array();
-	if ( empty( $users ) ) {
-		return '<div class="rgbc-users rgbc-users__title">
-					<p>Please select at least 1 user in the block settings</p>
-				</div>';
-	}
-	$users_data = get_users( array( 'include' => $users ) );
-	if ( empty( $users_data ) ) {
-		return '<div class="rgbc-users rgbc-users__text">
-					<p>Can`t find selected users data</p>
-				</div>';
-	}
-	$result = '<div class="rgbc-users">';
-	foreach ( $users_data as $user ) {
-		$result .= '<div class="rgbc-users__row">';
-		
-		$result .= '<div class="rgbc-users__avatar">';
-		$result .= get_avatar( $user->id, 96 );
-		$result .= '</div>';
-
-		$result .= '<div class="rgbc-users__name">';
-		$result .= $user->display_name;
-		$result .= '</div>';
-
-		$result .= '<div class="rgbc-users__email">';
-		$result .= $user->user_email;
-		$result .= '</div>';
-		
-		$result .= '<div class="rgbc-users__biography">';
-		$result .= $user->user_description;
-		$result .= '</div>';
-
-		$result .= '</div>';
-	}
-	$result .= '</div>';
-	return $result;
-}
-
 /**
  * Register block editor script
  */
