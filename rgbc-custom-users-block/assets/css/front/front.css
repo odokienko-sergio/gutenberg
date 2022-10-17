@@ -25,6 +25,12 @@
 	font-size: 15px;
 	font-weight: 300;
 }
+
+.rgbc-users__biography {
+    font-size: 16px;
+    overflow: hidden;
+}
+
 @media (max-width: 767px) {
 	.rgbc-users {
 		flex-direction: column;
@@ -42,7 +48,7 @@
 	.rgbc-users__email {
 		overflow: hidden;
 	}
-
+   
 	.rgbc-users__row {
 		width: 100%;
 		text-align: left;
