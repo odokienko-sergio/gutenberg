@@ -14,7 +14,7 @@ if ( ! class_exists( 'RGBC_CUB' ) ) {
 		}
 
 		public function enqueue_admin() {
-			wp_enqueue_style( 'rgbc_style_admin', RGBC_CUB_URL . 'assets/css/admin/admin.css', RGBC__VERSION );
+			wp_enqueue_style( 'rgbc_style_admin', RGBC_CUB_URL . 'assets/css/admin/admin.css', RGBC_CUB_VERSION );
 		}
 
 		public function enqueue_front() {
